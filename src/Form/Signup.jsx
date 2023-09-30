@@ -20,7 +20,7 @@ const SignUp = () => {
 
 
     const submit = (data) => {
-
+console.log(data)
         const { name, email, number, image, password, confirm } = data
         const formData = new FormData()
         formData.append('image', image[0])
@@ -154,6 +154,12 @@ const SignUp = () => {
                     </div>
 
                     <p className="text-red-600 pt-2">{error}</p>
+                    <div>
+                        <label className=" flex gap-2 text-gray-700 font-semibold" htmlFor="checkbox">
+                            <span>Would you like to create Mentor account?</span>
+                            <input {...register('checkbox')}  type="checkbox" name="hello" id="checkbox" />
+                        </label>
+                     </div>
                     <button className="bg-sky-500 hover:bg-sky-600 font-semibold p-2 w-full rounded-lg" type="submit">Sign up</button>
 
                 </form>

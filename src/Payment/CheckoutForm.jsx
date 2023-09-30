@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './payment.css'
- 
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../Authentication/AuthContext';
 import Swal from 'sweetalert2';
@@ -19,9 +19,9 @@ const CheckoutForm = () => {
     const [clientSecret, setClientSecret] = useState("");
     const navigate = useNavigate()
     const { user } = useContext(Context)
-    const {state} = useLocation()
-    console.log(clientSecret)
-   
+    const { state } = useLocation()
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setProcessing(true)
@@ -59,12 +59,12 @@ const CheckoutForm = () => {
             setErrorMessage('')
             console.log('[paymentIntent]', paymentIntent);
         }
-        
+
         if (paymentIntent?.status == 'succeeded') {
             fetch('http://localhost:5000/enrolled', {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
-                body:JSON.stringify({id:state.id})
+                body: JSON.stringify({ id: state.id, UserEmail: user?.email })
             })
                 .then(res => res.json())
                 .then(res => {
@@ -79,17 +79,17 @@ const CheckoutForm = () => {
                             confirmButtonText: 'go to Dashboard'
                         }).then(res => {
                             if (res.isConfirmed) {
-                                navigate('/dashboard/savecourse')
+                                navigate('/dashboard/myclass')
                             } else {
                                 navigate('/')
                             }
                         })
                     }
-            })
+                })
         }
-                        
-        };
-    
+
+    };
+
 
 
     useEffect(() => {
@@ -97,7 +97,7 @@ const CheckoutForm = () => {
             fetch("http://localhost:5000/create-payment-intent", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({price:state.price}),
+                body: JSON.stringify({ price: state.price }),
             })
                 .then((res) => res.json())
                 .then((data) => setClientSecret(data.clientSecret));

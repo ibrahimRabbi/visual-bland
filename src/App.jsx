@@ -11,6 +11,11 @@ import PrivetRoute from "./privetRoute/PrivetRoute"
 import Dashboard from "./Dashboard/Dashboard"
 import SaveCourse from "./Dashboard/userDashboard/SaveCourse"
 import Payment from "./Payment/Payment"
+import MyClass from "./Dashboard/userDashboard/MyClass"
+import Addcourse from "./Dashboard/instructorDashboard/AddCourse"
+import MyCourse from "./Dashboard/instructorDashboard/MyCourse"
+import UpdateCourse from "./Dashboard/instructorDashboard/UpdateCourse"
+import Search from "./search/Search"
 
  
 
@@ -29,6 +34,10 @@ function App() {
           path: ':id',
           element: <PrivetRoute><SingleCourse/></PrivetRoute>,
           loader: ({ params }) => fetch(`http://localhost:5000/data/${params.id}`)
+        },
+        {
+          path: '/search',
+          element: <Search/>
         }
       ]
     },
@@ -47,6 +56,23 @@ function App() {
         {
           path: 'savecourse',
           element : <SaveCourse/>
+        },
+        {
+          path: 'myclass',
+          element:<MyClass/>
+        },
+        {
+          path: 'addcourse',
+          element : <Addcourse/>
+        },
+        {
+          path: 'mycourse',
+          element : <MyCourse/>
+        },
+        {
+          path: 'updatecourse/:id',
+          element: <UpdateCourse />,
+          loader: ({ params }) => fetch(`http://localhost:5000/data/${params.id}`)
         }
       ]
     },

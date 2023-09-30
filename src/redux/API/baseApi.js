@@ -11,8 +11,17 @@ export const getData = createApi({
         idData: build.query({
             query : (id) => `/data/${id}`
         }),
+        enrolledData: build.query({
+            query: (email) => `/enrolled?email=${email}`
+        }),
+        user: build.query({
+            query : (email) => `/user?email=${email}`
+        }),
+        oneDataGet: build.query({
+            query: (email) => `/data?email=${email}`
+        })
          
     })
 })
 
- export const {useAllDataQuery,useIdDataQuery } = getData
+ export const {useAllDataQuery,useIdDataQuery,useEnrolledDataQuery,useUserQuery,useOneDataGetQuery } = getData

@@ -1,21 +1,26 @@
 import React, { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../Authentication/AuthContext';
 
 const Navbar = () => {
 
     const ref = useRef(null)
-    const {user} = useContext(Context)
-
+    const { user } = useContext(Context)
+    const navigate = useNavigate()
     const searchHandler = () => {
-        console.log('hello')
+        fetch(`http://localhost:5000/data?search=${ref.current.value}`)
+            .then(res => res.json())
+            .then(res => {
+                navigate('/search', { state: { data: res, search: ref.current.value } })
+            })
+
     }
 
-     
+
     return (
         <div className='bg-slate-100'>
 
-            <div className="navbar w-[90%] flex justify-between mx-auto py-4">
+            <div className="navbar lg:w-[90%] flex justify-between mx-auto py-4">
                 {/* start */}
                 <div className="">
                     <Link className="btn btn-ghost normal-case text-red-600 font-bold text-2xl"><span className='text-sky-500'>VISUAL</span> BLAND</Link>
@@ -62,10 +67,10 @@ const Navbar = () => {
                                     <img src={user?.photoURL} />
                                 </div>
                             </label>
-                        </div>: <Link to='/signin' className='bg-sky-400 text-slate-200 p-2 hover:bg-sky-600 rounded-lg'>Sign In</Link>
+                        </div> : <Link to='/signin' className='bg-sky-400 text-slate-200 p-2 hover:bg-sky-600 rounded-lg'>Sign In</Link>
                     }
-                    
-                </div> 
+
+                </div>
             </div>
         </div>
     );

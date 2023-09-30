@@ -9,6 +9,7 @@ const SaveCourse = () => {
     const {user} = useContext(Context)
      const [data,setData] = useState([])
     const navigate = useNavigate()
+
     const delteHandler = (id) => {
         fetch(`http://localhost:5000/savecourse/${id}`, {
             method:'DELETE'
@@ -19,11 +20,11 @@ const SaveCourse = () => {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Sign in successfull',
+                        title: 'unSave done',
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    refetch()
+                    
                 }
         })
     }
