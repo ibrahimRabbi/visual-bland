@@ -10,6 +10,7 @@ import Signin from "./Form/Signin"
 import PrivetRoute from "./privetRoute/PrivetRoute"
 import Dashboard from "./Dashboard/Dashboard"
 import SaveCourse from "./Dashboard/userDashboard/SaveCourse"
+import Payment from "./Payment/Payment"
 
  
 
@@ -48,6 +49,10 @@ function App() {
           element : <SaveCourse/>
         }
       ]
+    },
+    {
+      path: '/payment',
+      element:<Payment/>
     }
   ])
 

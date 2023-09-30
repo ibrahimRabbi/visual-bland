@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { BsFillBookmarkCheckFill } from 'react-icons/bs';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 import { useIdDataQuery } from '../redux/API/baseApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { update } from '../redux/slice/courseSaveSlice';
@@ -10,7 +10,7 @@ const SingleCourse = () => {
     const { id } = useParams()
     const { data = {} } = useIdDataQuery(id)
     const {user} = useContext(Context)
-    const { price, iname, name, email,img, descrioption, iImage, thumbnail } = data
+    const { price, iname, name, email,img, descrioption, iImage, thumbnail,_id } = data
     const dispatch = useDispatch()
     const { obj } = useSelector((state) => state.courseWouldSave)
    const createObj = {name,price,img,email:user?.email}
@@ -50,7 +50,7 @@ const SingleCourse = () => {
                             <li>Cirtificate Provide</li>
                         </ol>
                     </div>
-                    <button className='btn bg-sky-500 mt-10 w-[76%] mx-auto block text-slate-100 hover:bg-sky-600'>Enroll Now</button>
+                    <Link to='/payment' state={{price,id:_id}} className='text-center p-2 rounded-lg bg-sky-500 mt-10 w-[76%] mx-auto block text-slate-100 hover:bg-sky-600'>Enroll Now</Link>
                 </div>
             </div>
 
